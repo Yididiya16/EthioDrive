@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Test Drive | EthioDrive</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.html">EthioDrive</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="rent.html">Rent</a>
+                <a href="buy.html">Buy</a>
+                <a href="booking.html" class="active">Book Test Drive</a>
+                <a href="../auth/login.php">Login</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Book Test Drive or Viewing</h1>
+        <p>Experience the vehicle before you decide</p>
+    </div>
+</section>
+
+<section class="container mt-3">
+<form method="POST" action="/nawa54/booking.php">
+<div class="grid grid-2 gap-2">
+
+<!-- LEFT -->
+<div class="card">
+    <h2>Booking Details</h2>
+
+    <div class="form-group">
+        <label>Booking Type</label>
+        <select class="form-control" name="booking_type" id="bookingType">
+            <option value="test_drive">Test Drive</option>
+            <option value="rent">Rent</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="date" class="form-control" name="start_date" required>
+        </div>
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="date" class="form-control" name="end_date" required>
+        </div>
+    </div>
+
+    <div id="testDriveFields">
+        <!-- License not stored in DB, but required for validation -->
+    </div>
+
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea class="form-control" name="notes"></textarea>
+    </div>
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+    <h2>Your Info</h2>
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input class="form-control" name="full_name" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Phone</label>
+        <input class="form-control" name="phone" required>
+    </div>
+
+    <div class="form-group">
+        <label>Select Vehicle</label>
+        <select class="form-control" name="vehicle_id" required>
+            <option value="">Select vehicle</option>
+            <option value="1">Toyota Vitz 2022</option>
+            <option value="2">Toyota Corolla 2023</option>
+            <option value="3">Land Cruiser 2021</option>
+        </select>
+    </div>
+
+    <button class="btn btn-success btn-full mt-2">
+        <i class="fas fa-calendar-check"></i> Confirm Booking
+    </button>
+</div>
+
+</div>
+</form>
+</section>
+
+<footer class="footer mt-3">
+    <div class="container">
+        <p>&copy; 2025 EthioDrive</p>
+    </div>
+</footer>
+
+<script>
+const bookingType = document.getElementById('bookingType');
+const testDriveFields = document.getElementById('testDriveFields');
+
+bookingType.addEventListener('change', () => {
+    testDriveFields.style.display =
+        bookingType.value === 'test_drive' ? 'block' : 'none';
+});
+</script>
+
+</body>
+</html>

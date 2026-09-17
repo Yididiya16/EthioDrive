@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Vehicle | EthioDrive</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.html">EthioDrive</a>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="rent.html">Rent</a>
+                <a href="buy.html" class="active">Buy</a>
+                <a href="about.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+
+                <!-- PHP will control this later -->
+              <!--  <a href="../auth/login.php">Login</a>  -->
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <div class="container">
+        <h1>Buy a Vehicle</h1>
+        <p>Own your perfect vehicle from our certified collection</p>
+    </div>
+</section>
+
+<!-- ================= VEHICLES ================= -->
+<section class="container mt-3">
+    <div class="grid grid-3 gap-2" id="buyVehiclesContainer">
+        <!-- JS renders vehicles -->
+    </div>
+</section>
+
+<!-- ================= HOW TO BUY ================= -->
+<section class="container mt-3">
+    <div class="card">
+        <h2 class="text-center">How to Buy</h2>
+
+        <div class="grid grid-4 mt-2 text-center">
+            <div>
+                <div class="profile-avatar">1</div>
+                <h4>Choose Vehicle</h4>
+                <p>Select your car</p>
+            </div>
+            <div>
+                <div class="profile-avatar">2</div>
+                <h4>Inspection</h4>
+                <p>Test & verify</p>
+            </div>
+            <div>
+                <div class="profile-avatar">3</div>
+                <h4>Payment</h4>
+                <p>Secure payment</p>
+            </div>
+            <div>
+                <div class="profile-avatar">4</div>
+                <h4>Documents</h4>
+                <p>Ownership transfer</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PURCHASE FORM ================= -->
+<section class="container mt-3">
+    <div class="card">
+        <h2>Purchase Inquiry</h2>
+
+        <form method="POST" action="/nawa54/buy.php">
+
+            <div class="grid grid-2 gap-2">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="buyer_name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="buyer_email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="buyer_phone" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Vehicle</label>
+                    <select name="vehicle_id" id="interestVehicle" class="form-control" required>
+                        <option value="">Select vehicle</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" rows="4" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" name="buy_vehicle" class="btn btn-success btn-full">
+                <i class="fas fa-shopping-cart"></i> Buy Vehicle
+            </button>
+
+        </form>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer mt-3">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2025 EthioDrive. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div class="modal" id="buyModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalBuyVehicleName"></h3>
+            <button class="modal-close" onclick="closeBuyModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img id="modalBuyVehicleImage" class="vehicle-img">
+            <p id="modalBuyVehicleDescription"></p>
+            <div id="modalBuyVehiclePrice" class="vehicle-price"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= JS (UI ONLY) ================= -->
+<script>
+const buyVehicles = [
+    {id:1,name:"Toyota Corolla 2020",price:850000,image:"https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600"},
+    {id:2,name:"Toyota Hilux 2019",price:1200000,image:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600"},
+    {id:3,name:"Toyota Vitz 2018",price:650000,image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600"}
+];
+
+const container = document.getElementById("buyVehiclesContainer");
+const select = document.getElementById("interestVehicle");
+
+buyVehicles.forEach(v => {
+    container.innerHTML += `
+        <div class="card vehicle-card">
+            <img src="${v.image}" class="vehicle-img">
+            <h3>${v.name}</h3>
+            <div class="vehicle-price">${v.price.toLocaleString()} ETB</div>
+            <button class="btn btn-outline" onclick="viewBuyVehicle(${v.id})">Details</button>
+        </div>
+    `;
+    select.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+});
+
+function viewBuyVehicle(id){
+    const v = buyVehicles.find(x=>x.id===id);
+    document.getElementById("modalBuyVehicleName").textContent = v.name;
+    document.getElementById("modalBuyVehicleImage").src = v.image;
+    document.getElementById("modalBuyVehiclePrice").textContent = v.price.toLocaleString()+" ETB";
+    document.getElementById("buyModal").classList.add("show");
+}
+function closeBuyModal(){
+    document.getElementById("buyModal").classList.remove("show");
+}
+</script>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        if (themeIcon) {
+            themeIcon.className =
+                savedTheme === 'light'
+                    ? 'fas fa-moon'
+                    : 'fas fa-sun';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme =
+                document.documentElement.getAttribute('data-theme');
+
+            const newTheme =
+                currentTheme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute(
+                'data-theme',
+                newTheme
+            );
+
+            localStorage.setItem('theme', newTheme);
+
+            if (themeIcon) {
+                themeIcon.className =
+                    newTheme === 'light'
+                        ? 'fas fa-moon'
+                        : 'fas fa-sun';
+            }
+        });
+    }
+</script>
+
+
+
+</body>
+</html>

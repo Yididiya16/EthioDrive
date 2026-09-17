@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles | EthioDrive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.html">EthioDrive</a>
+            </div>
+            <!--
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vehicles.html" class="active">Vehicles</a>
+                <a href="rent.php">Rent</a>
+                <a href="buy.php">Buy</a>
+                <a href="about.html">About Us</a>
+                <a href="auth/login.php">Login</a>
+                <a href="auth/register.php">Register</a>-->
+
+
+            <div class="nav-links">
+               <a href="index.html">Home</a>
+               <a href="vehicles.html" class="active">Vehicles</a>
+               <a href="PHP_file/rent.php">Rent</a>
+               <a href="PHP_file/buy.php">Buy</a>
+               <a href="about.html">About Us</a>
+               <a href="login.html">Login</a>
+               <a href="register.html">Register</a>
+
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
+
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <h1>Our Vehicle Collection</h1>
+        <p>Reliable vehicles ready for Ethiopian roads</p>
+    </div>
+</section>
+
+<!-- Filters (UI ONLY) -->
+<section class="container mt-3">
+    <div class="card glass">
+        <div class="grid grid-4">
+            <div class="form-group">
+                <label>Vehicle Type</label>
+                <select class="form-control">
+                    <option>All Types</option>
+                    <option>Sedan</option>
+                    <option>SUV</option>
+                    <option>Pickup</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Transmission</label>
+                <select class="form-control">
+                    <option>All</option>
+                    <option>Automatic</option>
+                    <option>Manual</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Fuel</label>
+                <select class="form-control">
+                    <option>All</option>
+                    <option>Petrol</option>
+                    <option>Diesel</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sort By</label>
+                <select class="form-control">
+                    <option>Default</option>
+                    <option>Price (Low → High)</option>
+                    <option>Price (High → Low)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vehicles -->
+<section class="container mt-3">
+    <h2>Available Vehicles</h2>
+
+    <div class="grid grid-4 mt-2">
+
+        <!-- PHP WILL LOOP THIS CARD -->
+        <div class="card vehicle-card">
+            <div class="vehicle-img-container">
+                <img src="../images/sample-car.jpg" class="vehicle-img" alt="Vehicle">
+                <span class="vehicle-badge">FOR RENT</span>
+            </div>
+
+            <h3>Toyota Corolla 2023</h3>
+            <p>Automatic • Petrol • 5 Seats</p>
+
+            <div class="flex-between mt-1">
+                <div class="vehicle-price">1,800 ETB / day</div>
+                <span class="status-badge status-active">Available</span>
+            </div>
+
+            <div class="flex gap-1 mt-2">
+                <button class="btn btn-sm btn-outline" onclick="openModal()">
+                    <i class="fas fa-eye"></i> Details
+                </button>
+           <!-- <a href="../rent.php?vehicle_id=1" class="btn btn-sm"> -->
+            <a href="PHP_file/rent.php?vehicle_id=1" class="btn btn-sm">
+                    <i class="fas fa-car"></i> Rent
+                </a>
+            </div>
+        </div>
+        <!-- END LOOP -->
+
+    </div>
+</section>
+
+<!-- Modal (STATIC – PHP FILLS LATER) -->
+<div class="modal" id="vehicleModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Vehicle Details</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img src="../images/sample-car.jpg" class="vehicle-img">
+            <p class="mt-1">
+                Detailed vehicle description will come from database.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-3">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2025 EthioDrive. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- UI JavaScript ONLY -->
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    themeToggle.onclick = () => {
+        const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateIcon(theme);
+    };
+
+    function updateIcon(theme) {
+        themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+
+    function openModal() {
+        document.getElementById('vehicleModal').classList.add('show');
+    }
+
+    function closeModal() {
+        document.getElementById('vehicleModal').classList.remove('show');
+    }
+</script>
+
+</body>
+</html>
+

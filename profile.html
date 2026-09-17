@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | EthioDrive</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.php">EthioDrive</a>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.php">Home</a>
+                <a href="vehicles.php">Vehicles</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="profile.php" class="active">Profile</a>
+                <a href="../auth/logout.php">Logout</a>
+
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ================= PROFILE ================= -->
+<section class="container mt-3">
+    <div class="grid grid-3 gap-2">
+
+        <!-- LEFT -->
+        <div>
+            <div class="card text-center">
+                <div class="profile-avatar">
+                    <!-- PHP initials -->
+                    <?php echo strtoupper(substr($_SESSION['name'],0,2)); ?>
+                </div>
+
+                <h2><?php echo $_SESSION['name']; ?></h2>
+                <p><?php echo $_SESSION['email']; ?></p>
+
+                <div class="profile-stats mt-2">
+                    <div>
+                        <strong><?php echo $rentalCount ?? 0; ?></strong>
+                        <span>Rentals</span>
+                    </div>
+                    <div>
+                        <strong><?php echo $bookingCount ?? 0; ?></strong>
+                        <span>Bookings</span>
+                    </div>
+                    <div>
+                        <strong><?php echo $memberSince ?? '2025'; ?></strong>
+                        <span>Member Since</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE -->
+        <div>
+            <div class="card">
+                <h3>Personal Information</h3>
+
+                <form method="POST" action="/nawa54/profile.php">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" value="<?php echo $_SESSION['name']; ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" name="phone" value="<?php echo $phone ?? ''; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="<?php echo $_SESSION['email']; ?>" disabled>
+                    </div>
+
+                    <button class="btn btn-full">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <div class="card mt-2">
+                <h3>Change Password</h3>
+
+                <form method="POST" action="/nawa54/profile.php">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" name="current_password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" name="new_password" minlength="6" required>
+                    </div>
+
+                    <button class="btn btn-outline btn-full">
+                        Update Password
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div>
+            <div class="card">
+                <h3>Account Actions</h3>
+
+                <form method="POST" action="/nawa54/profile.php">
+                    <button class="btn btn-danger btn-full">
+                        <i class="fas fa-trash"></i> Delete Account
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer mt-3">
+    <div class="container">
+        <p>&copy; 2024 EthioDrive. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ================= JS (UI ONLY) ================= -->
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const icon = themeToggle.querySelector('i');
+
+themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    icon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+});
+</script>
+
+</body>
+</html>

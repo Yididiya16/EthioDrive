@@ -1,0 +1,213 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a Vehicle | EthioDrive</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.php">EthioDrive</a>
+            </div>
+
+            <div class="nav-links">
+        <!--    <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="rent.php" class="active">Rent</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="auth/logout.php">Logout</a> -->
+
+
+                <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="rent.html" class="active">Rent</a>
+                <a href="buy.html">Buy</a>
+                <a href="about.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="PHP_file/dashboard.php">Dashboard</a>
+                <a href="PHP_file/auth/logout.php">Logout</a>
+
+
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <div class="container">
+        <h1>Rent a Vehicle</h1>
+        <p>Flexible rental options across Ethiopia</p>
+    </div>
+</section>
+
+<!-- ================= RENT FORM ================= -->
+<form method="POST" action="/nawa54/rent.php">
+<section class="container mt-3">
+<div class="grid grid-2 gap-2">
+
+<!-- VEHICLE -->
+<div class="card">
+    <h2>1. Choose Vehicle</h2>
+    <select class="form-control" name="vehicle_id" id="vehicleSelect" required onchange="updateVehicleDetails()">
+        <option value="">Select vehicle</option>
+        <option value="1">Toyota Vitz – 1,200 ETB/day</option>
+        <option value="2">Toyota Corolla – 1,800 ETB/day</option>
+        <option value="3">Land Cruiser – 5,000 ETB/day</option>
+    </select>
+
+    <div id="vehicleDetails" class="hidden mt-2">
+        <h3 id="selectedVehicleName"></h3>
+        <p id="selectedVehicleSpecs"></p>
+        <img id="selectedVehicleImage" class="vehicle-img">
+    </div>
+</div>
+
+<!-- RENTAL DETAILS -->
+<div class="card">
+    <h2>2. Rental Details</h2>
+
+    <div class="form-row">
+        <input type="date" name="start_date" id="pickupDate" required>
+        <input type="date" name="end_date" id="returnDate" required>
+    </div>
+
+    <textarea name="notes" placeholder="Additional notes"></textarea>
+</div>
+
+<!-- PRICE -->
+<div class="card">
+    <h2>3. Price Summary</h2>
+    <p>Days: <strong id="numberOfDays">0</strong></p>
+    <p>Subtotal: <strong id="subtotal">0 ETB</strong></p>
+    <p>Insurance: <strong id="insurance">0 ETB</strong></p>
+    <p>Total: <strong id="totalAmount">0 ETB</strong></p>
+</div>
+
+<!-- PAYMENT -->
+<div class="card">
+    <h2>4. Confirm</h2>
+
+    <label><input type="radio" name="payment" value="cash" checked> Cash</label>
+    <label><input type="radio" name="payment" value="telebirr"> Telebirr</label>
+
+    <label class="checkbox-group">
+        <input type="checkbox" id="termsAgreement" required>
+        I agree to terms
+    </label>
+
+    <button type="submit" class="btn btn-success btn-full" id="rentButton" disabled>
+        Confirm Rental
+    </button>
+</div>
+
+</div>
+</section>
+</form>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer mt-3">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2025 EthioDrive. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= JS (UI ONLY) ================= -->
+<script>
+const vehicles = {
+    1:{name:"Toyota Vitz",rate:1200,img:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6"},
+    2:{name:"Corolla",rate:1800,img:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2"},
+    3:{name:"Land Cruiser",rate:5000,img:"https://images.unsplash.com/photo-1519641471654-76ce0107ad1b"}
+};
+
+function updateVehicleDetails(){
+    const v = vehicles[vehicleSelect.value];
+    if(!v) return;
+    selectedVehicleName.textContent = v.name;
+    selectedVehicleImage.src = v.img;
+    vehicleDetails.classList.remove("hidden");
+    calculate();
+}
+
+function calculate(){
+    if(!pickupDate.value || !returnDate.value) return;
+    const days = Math.max(1,(new Date(returnDate)-new Date(pickupDate))/86400000);
+    const sub = vehicles[vehicleSelect.value].rate * days;
+    const ins = sub * 0.1;
+    numberOfDays.textContent = days;
+    subtotal.textContent = sub + " ETB";
+    insurance.textContent = ins + " ETB";
+    totalAmount.textContent = (sub+ins) + " ETB";
+    rentButton.disabled = !termsAgreement.checked;
+}
+
+pickupDate.onchange = returnDate.onchange = calculate;
+termsAgreement.onchange = () => rentButton.disabled = !termsAgreement.checked;
+</script>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        if (themeIcon) {
+            themeIcon.className =
+                savedTheme === 'light'
+                    ? 'fas fa-moon'
+                    : 'fas fa-sun';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme =
+                document.documentElement.getAttribute('data-theme');
+
+            const newTheme =
+                currentTheme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute(
+                'data-theme',
+                newTheme
+            );
+
+            localStorage.setItem('theme', newTheme);
+
+            if (themeIcon) {
+                themeIcon.className =
+                    newTheme === 'light'
+                        ? 'fas fa-moon'
+                        : 'fas fa-sun';
+            }
+        });
+    }
+</script>
+
+
+</body>
+</html>

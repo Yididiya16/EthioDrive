@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthioDrive | Vehicle Rental & Purchase System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <span>EthioDrive</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200'); background-size: cover; color: white; padding: 6rem 0; text-align: center;">
+        <div class="container">
+            <h1>Find Your Perfect Ride in Ethiopia</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">Rent or purchase reliable vehicles including Toyota Vitz, Corolla, Land Cruiser, Hilux, and more</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="rent.html" class="btn">Rent a Vehicle</a>
+                <a href="buy.html" class="btn btn-outline" style="color: white; border-color: white;">Buy a Vehicle</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="container mt-3 mb-3">
+        <h2 class="text-center">Why Choose EthioDrive?</h2>
+        <div class="grid grid-3 mt-2">
+            <div class="card text-center">
+                <i class="fas fa-shield-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Verified Vehicles</h3>
+                <p>All vehicles undergo thorough inspection and maintenance checks.</p>
+            </div>
+            <div class="card text-center">
+                <i class="fas fa-bolt" style="font-size: 3rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                <h3>Quick Booking</h3>
+                <p>Book your vehicle in minutes with our simple online process.</p>
+            </div>
+            <div class="card text-center">
+                <i class="fas fa-headset" style="font-size: 3rem; color: var(--warning); margin-bottom: 1rem;"></i>
+                <h3>24/7 Support</h3>
+                <p>Our customer service team is always ready to assist you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Vehicles -->
+    <section class="container mt-3 mb-3">
+        <h2 class="text-center">Popular Rental Vehicles</h2>
+        <div class="grid grid-4 mt-2" id="featuredVehicles">
+            <!-- Vehicles will be loaded via JavaScript -->
+        </div>
+        <div class="text-center mt-2">
+            <a href="vehicles.html" class="btn">View All Vehicles</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EthioDrive</h3>
+                    <p>Your trusted partner for vehicle rental and purchase in Ethiopia.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="vehicles.html">Vehicles</a>
+                    <a href="rent.html">Rent</a>
+                    <a href="buy.html">Buy</a>
+                    <a href="about.html">About Us</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Hossana, Ethiopia</p>
+                    <p><i class="fas fa-phone"></i> +251906892073</p>
+                    
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#"><i class="fab fa-facebook" style="font-size: 1.5rem;"></i></a>
+                        <a href="#"><i class="fab fa-telegram" style="font-size: 1.5rem;"></i></a>
+                        <a href="#"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EthioDrive. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // ===== THEME TOGGLE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Get saved theme or use system preference
+            function getSavedTheme() {
+                const saved = localStorage.getItem('theme');
+                if (saved) return saved;
+                
+                // Check system preference
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            
+            // Set theme
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                updateThemeIcon(theme);
+            }
+            
+            // Update theme icon
+            function updateThemeIcon(theme) {
+                if (theme === 'light') {
+                    themeIcon.className = 'fas fa-moon';
+                    themeIcon.title = 'Switch to dark mode';
+                } else {
+                    themeIcon.className = 'fas fa-sun';
+                    themeIcon.title = 'Switch to light mode';
+                }
+            }
+            
+            // Initialize theme
+            const currentTheme = getSavedTheme();
+            setTheme(currentTheme);
+            
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        });
+        
+        // ===== FEATURED VEHICLES =====
+        const featuredVehicles = [
+            {
+                name: "Toyota Vitz 2022",
+                type: "Hatchback",
+                price: "1,200 ETB/day",
+                image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600",
+                seats: 5,
+                transmission: "Automatic"
+            },
+            {
+                name: "Toyota Corolla 2023",
+                type: "Sedan",
+                price: "1,800 ETB/day",
+                image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600",
+                seats: 5,
+                transmission: "Automatic"
+            },
+            {
+                name: "Toyota Land Cruiser",
+                type: "SUV",
+                price: "5,000 ETB/day",
+                image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600",
+                seats: 8,
+                transmission: "Automatic"
+            },
+            {
+                name: "Hilux Pickup 2022",
+                type: "Pickup",
+                price: "3,000 ETB/day",
+                image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600",
+                seats: 5,
+                transmission: "Manual"
+            }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const vehiclesContainer = document.getElementById('featuredVehicles');
+            if (vehiclesContainer) {
+                featuredVehicles.forEach(vehicle => {
+                    const vehicleCard = document.createElement('div');
+                    vehicleCard.className = 'card vehicle-card';
+                    vehicleCard.innerHTML = `
+                        <div class="vehicle-img-container">
+                            <img src="${vehicle.image}" alt="${vehicle.name}" class="vehicle-img">
+                            <div class="vehicle-overlay">
+                                <div class="vehicle-title">${vehicle.name}</div>
+                                <div class="vehicle-type">${vehicle.type}</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="vehicle-details">
+                                <span><i class="fas fa-users"></i> ${vehicle.seats} seats</span>
+                                <span><i class="fas fa-cog"></i> ${vehicle.transmission}</span>
+                            </div>
+                            <div class="flex-between">
+                                <span class="vehicle-price">${vehicle.price}</span>
+                                <button class="btn btn-sm" onclick="window.location.href='rent.html'">Rent Now</button>
+                            </div>
+                        </div>
+                    `;
+                    vehiclesContainer.appendChild(vehicleCard);
+                });
+            }
+        });
+        
+        // ===== LOGIN STATUS CHECK =====
+        function checkLoginStatus() {
+            // In a real app, this would check with the server
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (isLoggedIn && navLinks) {
+                const userName = localStorage.getItem('userName') || 'User';
+                navLinks.innerHTML = `
+                    <a href="index.html" class="active">Home</a>
+                    <a href="vehicles.html">Vehicles</a>
+
+                    
+
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="about.html">About Us</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                `;
+                
+                // Reinitialize theme toggle for the new button
+                setTimeout(() => {
+                    const newThemeToggle = document.getElementById('themeToggle');
+                    const newThemeIcon = newThemeToggle.querySelector('i');
+                    
+                    if (newThemeToggle) {
+                        newThemeToggle.addEventListener('click', function() {
+                            const currentTheme = document.documentElement.getAttribute('data-theme');
+                            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                            document.documentElement.setAttribute('data-theme', newTheme);
+                            localStorage.setItem('theme', newTheme);
+                            newThemeIcon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+                        });
+                    }
+                }, 100);
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('isAdmin');
+            window.location.href = 'index.html';
+        }
+        
+        // Check login on page load
+        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+
+
+
+
+
+
+    </script>
+</body>
+</html>

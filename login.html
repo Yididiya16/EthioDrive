@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | EthioDrive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <a href="index.html" style="color: inherit;">EthioDrive</a>
+                </div>
+                <div class="nav-links">
+                 <!--  <a href="index.html">Home</a>
+                    <a href="login.html" class="active">Login</a>
+                    <a href="register.html">Register</a> -->
+
+                    <a href="index.html">Home</a>
+                    <a href="vehicles.html">Vehicles</a>
+                    <a href="rent.html">Rent</a>
+                    <a href="buy.html">Buy</a>
+                    <a href="about.html">About Us</a>
+                    <a href="login.html" class="active">Login</a>
+                    <a href="register.html">Register</a>
+
+
+
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <section class="container" style="max-width: 500px; margin: 6rem auto;">
+        <div class="card p-2">
+            <h2 class="text-center">Login to Your Account</h2>
+            
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+            
+         <!--   <form id="loginForm" onsubmit="handleLogin(event)"> -->
+              
+        <form id="loginForm" action="PHP_file/auth_session/login.php" method="POST">
+            <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Create password" required minlength="6">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%;">
+                    <span id="loginText">Login</span>
+                    <span id="loginSpinner" class="hidden" style="display: inline-block;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </fm>
+            
+            <div class="text-center mt-2">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+            </div>
+            
+            <div class="text-center mt-2">
+                <p>Admin? <a href="#" onclick="showAdminLogin()">Login as admin</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 EthioDrive. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+        
+        // Login Handler - UPDATED WITH REDIRECT LOGIC
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginText = document.getElementById('loginText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            
+            // Show loading
+            loginText.classList.add('hidden');
+            loginSpinner.classList.remove('hidden');
+            
+            // Simulate API call
+            setTimeout(() => {
+                // This would be replaced with actual PHP backend call
+                if (email === 'admin@ethiodrive.et' && password === 'admin123') {
+                    showAlert('Login successful! Redirecting to dashboard...', 'success');
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('isAdmin', 'true');
+                    
+                    setTimeout(() => {
+                        // Check for redirect parameter
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const redirectPage = urlParams.get('redirect');
+                        
+                        if (redirectPage) {
+                            window.location.href = redirectPage;
+                        } else {
+                            window.location.href = 'admin.html';
+                        }
+                    }, 1500);
+                } else if (email && password.length >= 6) {
+                    showAlert('Login successful! Redirecting...', 'success');
+                    localStorage.setItem('isLoggedIn', 'true');
+                    
+                    setTimeout(() => {
+                        // Check for redirect parameter
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const redirectPage = urlParams.get('redirect');
+                        
+                        if (redirectPage) {
+                            window.location.href = redirectPage;
+                        } else {
+                            window.location.href = 'dashboard.html';
+                        }
+                    }, 1500);
+                } else {
+                    showAlert('Invalid email or password. Please try again.', 'error');
+                    loginText.classList.remove('hidden');
+                    loginSpinner.classList.add('hidden');
+                }
+            }, 1000);
+        }
+        
+        function showAdminLogin() {
+            document.getElementById('email').value = 'admin@ethiodrive.et';
+            document.getElementById('password').value = 'admin123';
+            showAlert('Admin credentials pre-filled. Click Login to continue.', 'success');
+        }
+        
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
+            alertDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; cursor: pointer; color: inherit;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

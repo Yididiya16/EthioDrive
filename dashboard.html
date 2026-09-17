@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | EthioDrive</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <a href="index.html" style="color: inherit;">EthioDrive</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="profile.html">Profile</a>
+                <a href="../auth/logout.php">Logout</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Dashboard -->
+<section class="container mt-3">
+    <h1>Welcome, <span><!-- <?= htmlspecialchars($userName) ?> -->User</span>!</h1>
+    <p>Your rental and purchase overview</p>
+
+    <!-- Stats -->
+    <div class="stats-grid mt-2">
+        <div class="card stat-card">
+            <i class="fas fa-car"></i>
+            <div class="stat-number"><!-- <?= $activeRentals ?> -->0</div>
+            <div class="stat-label">Active Rentals</div>
+        </div>
+
+        <div class="card stat-card">
+            <i class="fas fa-history"></i>
+            <div class="stat-number"><!-- <?= $totalBookings ?> -->0</div>
+            <div class="stat-label">Total Bookings</div>
+        </div>
+
+        <div class="card stat-card">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="stat-number"><!-- <?= $purchases ?> -->0</div>
+            <div class="stat-label">Purchases</div>
+        </div>
+
+        <div class="card stat-card">
+            <i class="fas fa-star"></i>
+            <div class="stat-number"><!-- <?= $loyaltyPoints ?> -->0</div>
+            <div class="stat-label">Loyalty Points</div>
+        </div>
+    </div>
+
+    <!-- Activity -->
+    <div class="grid grid-2 gap-1 mt-3">
+
+        <!-- Current Rentals -->
+        <div class="card">
+            <h3><i class="fas fa-car"></i> Current Rentals</h3>
+
+            <!-- PHP LOOP HERE -->
+            <div class="alert alert-success mt-1">
+                No active rentals.
+                <a href="rent.html">Rent a vehicle</a>
+            </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="card">
+            <h3><i class="fas fa-calendar-alt"></i> Recent Bookings</h3>
+
+            <!-- PHP LOOP HERE -->
+            <div class="alert mt-1">
+                No recent bookings.
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="card">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+
+            <div class="alert alert-success mt-1">
+                <strong>Welcome!</strong> Complete your profile for better recommendations.
+            </div>
+
+            <div class="alert mt-1">
+                <strong>Offer:</strong> Get 10% off your first rental.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer mt-3">
+    <div class="container">
+        <div class="footer-bottom">
+            <p>&copy; 2024 EthioDrive. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Theme Toggle JS (UI ONLY) -->
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+</script>
+
+</body>
+</html>

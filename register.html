@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | EthioDrive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <a href="index.html" style="color: inherit;">EthioDrive</a>
+                </div>
+                <div class="nav-links">
+               <!-- <a href="index.html">Home</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html" class="active">Register</a> -->
+
+                <a href="index.html">Home</a>
+                <a href="vehicles.html">Vehicles</a>
+                <a href="rent.html">Rent</a>
+                <a href="buy.html">Buy</a>
+                <a href="about.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="register.html" class="active">Register</a>    
+
+
+
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <section class="container" style="max-width: 600px; margin: 4rem auto;">
+        <div class="card p-2">
+            <h2 class="text-center">Create Your Account</h2>
+            <p class="text-center mb-2">Join EthioDrive for the best vehicle rental experience in Ethiopia</p>
+            
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+            
+    <form id="registerForm" action="PHP_file/auth_session/register.php" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+251 9xx xxx xxx" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Create password" required minlength="6">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="driver_license">Driver's License Number (Optional)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" class="form-control" id="driver_license" name="driver_license" placeholder="License number if available">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <textarea class="form-control" id="address" name="address" placeholder="Enter your address" rows="2"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-group">
+                        <input type="checkbox" name="terms" required>
+                        <span>I agree to the <a href="#" style="display: inline;">Terms & Conditions</a> and <a href="#" style="display: inline;">Privacy Policy</a></span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-full">
+                    <span id="registerText">Create Account</span>
+                    <span id="registerSpinner" class="hidden">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="text-center mt-2">
+                <p>Already have an account? <a href="login.html">Login here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 EthioDrive. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+        
+        // Registration Handler
+       
+    
+    
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <div class="alert-content">${message}</div>
+                <button class="alert-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('9')) {
+                value = '+251' + value;
+            }
+            e.target.value = value;
+        });
+    </script>
+    <script>
+const params = new URLSearchParams(window.location.search);
+const alertContainer = document.getElementById('alertContainer');
+
+const messages = {
+    success: {
+        type: 'success',
+        icon: 'check-circle',
+        text: 'Registration successful! Your account has been created. You can now log in.'
+    },
+
+    empty: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'Please fill in all required fields.'
+    },
+
+    email: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'Please enter a valid email address.'
+    },
+
+    password: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'Passwords do not match.'
+    },
+
+    short: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'Password must contain at least 6 characters.'
+    },
+
+    exists: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'This email is already registered. Please use another email.'
+    },
+
+    server: {
+        type: 'error',
+        icon: 'exclamation-circle',
+        text: 'Registration failed because of a server error. Please try again.'
+    }
+};
+
+const result =
+    params.get('success') === '1'
+        ? 'success'
+        : params.get('error');
+
+if (result && messages[result]) {
+
+    const message = messages[result];
+
+    const alertDiv = document.createElement('div');
+
+    alertDiv.className = `alert alert-${message.type}`;
+
+    alertDiv.innerHTML = `
+        <i class="fas fa-${message.icon}"></i>
+        <div class="alert-content">
+            ${message.text}
+        </div>
+        <button
+            class="alert-close"
+            onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+
+    alertContainer.appendChild(alertDiv);
+
+    if (result === 'success') {
+        document.getElementById('registerForm').reset();
+    }
+
+    setTimeout(() => {
+        if (alertDiv.parentElement) {
+            alertDiv.remove();
+        }
+    }, 7000);
+
+    // Remove the query string from the browser URL
+    window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+    );
+}
+</script>
+</body>
+</html>

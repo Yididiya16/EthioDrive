@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EthioDrive</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="admin-page">
+
+<!-- ================= TOP NAV ================= -->
+<nav class="admin-top-nav">
+    <div class="admin-nav-left">
+        <button class="admin-sidebar-toggle" id="adminSidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="admin-logo">
+            <i class="fas fa-car"></i>
+            <span>Ethio<span class="admin-logo-highlight">Admin</span></span>
+        </div>
+    </div>
+
+    <div class="admin-nav-right">
+        <div class="admin-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="Admin">
+            <div class="admin-profile-info">
+                <span class="admin-profile-name">Admin</span>
+                <span class="admin-profile-role">Administrator</span>
+            </div>
+            <a href="../auth/logout.php" class="admin-logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="admin-sidebar" id="adminSidebar">
+    <a href="#" class="admin-menu-item active" data-section="dashboard">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+    </a>
+    <a href="#" class="admin-menu-item" data-section="vehicles">
+        <i class="fas fa-car"></i> Vehicles
+    </a>
+    <a href="#" class="admin-menu-item" data-section="users">
+        <i class="fas fa-users"></i> Users
+    </a>
+    <a href="#" class="admin-menu-item" data-section="bookings">
+        <i class="fas fa-calendar-check"></i> Bookings
+    </a>
+    <a href="#" class="admin-menu-item" data-section="notifications">
+        <i class="fas fa-bell"></i> Notifications
+    </a>
+    <a href="#" class="admin-menu-item" data-section="settings">
+        <i class="fas fa-cog"></i> Settings
+    </a>
+</aside>
+
+<!-- ================= MAIN ================= -->
+<main class="admin-main" id="adminMain">
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="admin-content-section active">
+    <h1>Dashboard Overview</h1>
+    <p>Statistics will be loaded from PHP.</p>
+</section>
+
+<!-- VEHICLES -->
+<section id="vehicles" class="admin-content-section">
+    <h1>Vehicle Management</h1>
+
+    <form action="/nawa54/admin.php" method="POST" enctype="multipart/form-data" class="admin-card">
+        <input type="hidden" name="action" value="add_vehicle">
+        <h3>Add New Vehicle</h3>
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="brand" placeholder="Brand" required>
+        <input type="text" name="model" placeholder="Model" required>
+        <input type="number" name="year" placeholder="Year" required>
+        <input type="number" step="0.01" name="price" placeholder="Price" required>
+        <select name="price_type" required>
+            <option value="rent">Rent</option>
+            <option value="sale">Sale</option>
+        </select>
+        <textarea name="description" placeholder="Description"></textarea>
+        <input type="file" name="image" accept="image/*">
+        <button type="submit" class="admin-btn-primary">Save Vehicle</button>
+    </form>
+
+    <p>Vehicle list will be rendered using PHP loop.</p>
+</section>
+
+<!-- USERS -->
+<section id="users" class="admin-content-section">
+    <h1>User Management</h1>
+
+    <form action="/nawa54/admin.php" method="POST" class="admin-card">
+        <input type="hidden" name="action" value="add_user">
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <select name="role">
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+        </select>
+        <button type="submit" class="admin-btn-primary">Add User</button>
+    </form>
+
+    <p>User table will be generated via PHP.</p>
+</section>
+
+<!-- BOOKINGS -->
+<section id="bookings" class="admin-content-section">
+    <h1>Bookings</h1>
+    <p>Bookings fetched & updated using PHP (approve/reject).</p>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section id="notifications" class="admin-content-section">
+    <h1>Notifications</h1>
+    <p>Here you can view and manage notifications for new rental requests, approvals, etc.</p>
+    <div class="admin-card">
+        <h3>Recent Notifications</h3>
+        <ul class="notification-list">
+            <li class="notification-item">
+                <i class="fas fa-info-circle"></i>
+                <span>New rental request from John Doe for Toyota Vitz.</span>
+                <small>2 hours ago</small>
+                <button class="admin-btn-secondary">Mark as Read</button>
+            </li>
+            <li class="notification-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Rental approved for Jane Smith.</span>
+                <small>1 day ago</small>
+                <button class="admin-btn-secondary">Mark as Read</button>
+            </li>
+            <!-- More notifications will be loaded dynamically -->
+        </ul>
+    </div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="admin-content-section">
+    <h1>System Settings</h1>
+    <p>Controlled via PHP.</p>
+</section>
+
+</main>
+
+<!-- ================= UI ONLY JS ================= -->
+<script>
+const sidebarToggle = document.getElementById('adminSidebarToggle');
+const sidebar = document.getElementById('adminSidebar');
+const main = document.getElementById('adminMain');
+
+sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+});
+
+document.querySelectorAll('.admin-menu-item').forEach(item => {
+    item.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.admin-menu-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.admin-content-section').forEach(s => s.classList.remove('active'));
+
+        item.classList.add('active');
+        document.getElementById(item.dataset.section).classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
