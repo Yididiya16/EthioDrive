@@ -20,25 +20,6 @@
     --glass-border: rgba(255, 255, 255, 0.2);
     --blur: blur(10px);
 }
-/*
-[data-theme="dark"] {
-    --primary: #1163b1;
-    --primary-dark: #1163b1;
-    --secondary: #10b981;
-    --dark: #1163b1;
-    --light: #0f172a;
-    --gray: #94a3b8;
-    --gray-light: #1e293b;
-    --danger: #f87171;
-    --warning: #fbbf24;
-    --success: #34d399;
-    --glass-bg: rgba(15, 23, 42, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-*/
-
-
 
 [data-theme="dark"] {
     --primary: #3b82f6;
@@ -646,73 +627,6 @@ textarea.form-control {
 
 
 
-
-/* ===== FOOTER ===== */
-/*
-.footer {
-    background: var(--dark);
-    color: var(--light);
-    padding: 3rem 0 1.5rem;
-    margin-top: 4rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h3 {
-    color: var(--light);
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-}
-
-.footer-section p, .footer-section a {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.footer-section a:hover {
-    color: white;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.social-links a {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.social-links a:hover {
-    background: var(--primary);
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.875rem;
-}
-*/
-
-
-
-
 /* ===== BEAUTIFUL FOOTER ===== */
 
 .footer {
@@ -900,8 +814,6 @@ textarea.form-control {
         transform: translateY(0);
     }
 }
-
-
 
 
 /* ===== DASHBOARD SPECIFIC ===== */
@@ -1386,10 +1298,6 @@ textarea.form-control {
         border: 1px solid #ddd !important;
     }
 }
-
-
-
-
 
 
 /* ===== ADMIN PANEL STYLES ===== */
@@ -2750,3 +2658,906 @@ body.admin-page {
     }
 }
 
+
+
+
+/* =========================================================
+   ETHIODRIVE - FINAL RESPONSIVE DESIGN
+   Desktop → Tablet → Mobile → Small Mobile
+   ========================================================= */
+
+/* Prevent horizontal overflow */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Make containers flexible */
+.container {
+    width: min(100% - 32px, 1200px);
+    margin-inline: auto;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================================
+   TABLET - 769px to 1024px
+   ========================================================= */
+
+@media (max-width: 1024px) {
+
+    .container {
+        width: min(100% - 40px, 960px);
+    }
+
+    .navbar {
+        padding: 0.85rem 0;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+    }
+
+    .logo i {
+        font-size: 1.7rem;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        padding: 0.45rem 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vehicle-img-container {
+        height: 190px;
+    }
+
+    .hero {
+        padding: 4.5rem 0;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-sidebar {
+        width: 220px;
+    }
+
+    .admin-main {
+        margin-left: 220px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE - 768px and below
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* ---------- GLOBAL ---------- */
+
+    .container {
+        width: min(100% - 28px, 720px);
+        padding: 0;
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+
+    /* ---------- HEADER ---------- */
+
+    .navbar {
+        min-height: 64px;
+        padding: 0.7rem 0;
+    }
+
+    .logo {
+        font-size: 1.45rem;
+    }
+
+    .logo i {
+        font-size: 1.55rem;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0.35rem;
+
+        padding: 1rem;
+
+        background: var(--light);
+        border-bottom: 1px solid var(--glass-border);
+
+        box-shadow: var(--shadow-lg);
+
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+
+        z-index: 999;
+    }
+
+    .nav-links.show {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        text-align: center;
+    }
+
+    .user-menu {
+        gap: 0.5rem;
+    }
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* ---------- GRIDS ---------- */
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-auto {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+    }
+
+
+    /* ---------- VEHICLE CARDS ---------- */
+
+    .vehicle-img-container {
+        height: 180px;
+    }
+
+    .vehicle-card {
+        min-width: 0;
+    }
+
+    .vehicle-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .vehicle-card p {
+        font-size: 1rem;
+    }
+
+
+    /* ---------- BUTTONS ---------- */
+
+    .btn {
+        min-height: 44px;
+    }
+
+    .btn-lg {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+
+
+    /* ---------- FORMS ---------- */
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-control {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .input-with-icon .form-control {
+        padding-left: 48px;
+    }
+
+
+    /* ---------- AUTH ---------- */
+
+    .auth-section {
+        min-height: auto;
+        padding: 2rem 0.75rem;
+    }
+
+    .auth-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+        padding: 4rem 0 3rem;
+    }
+
+    .hero h1 {
+        font-size: 2.25rem;
+        line-height: 1.15;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+
+    /* ---------- PROFILE ---------- */
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 2.8rem;
+    }
+
+    .profile-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+
+    /* ---------- DASHBOARD ---------- */
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1.4rem 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+
+    /* ---------- CARDS ---------- */
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+
+
+    /* ---------- TABLES ---------- */
+
+    .admin-table-container,
+    .admin-table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-table,
+    .admin-data-table {
+        min-width: 650px;
+    }
+
+
+    /* ---------- MODALS ---------- */
+
+    .modal {
+        padding: 0.75rem;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    .footer {
+        padding: 2.5rem 0 1.25rem;
+        margin-top: 3rem;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+
+    /* ---------- ADMIN ---------- */
+
+    .admin-top-nav {
+        padding: 0 0.75rem;
+    }
+
+    .admin-search {
+        display: none;
+    }
+
+    .admin-nav-right {
+        gap: 0.5rem;
+    }
+
+    .admin-profile {
+        padding: 0.4rem;
+        border: none;
+        background: transparent;
+    }
+
+    .admin-profile .admin-profile-info {
+        display: none;
+    }
+
+    .admin-sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+    }
+
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .admin-dashboard-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .admin-date-filter {
+        width: 100%;
+    }
+
+    .admin-filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .admin-filter-group {
+        width: 100%;
+    }
+
+    .admin-filter-group select {
+        width: 100%;
+    }
+
+    .admin-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE - 480px and below
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: min(100% - 20px, 460px);
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+
+    /* ---------- TYPOGRAPHY ---------- */
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.45rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+
+    /* ---------- HEADER ---------- */
+
+    .navbar {
+        min-height: 60px;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+        gap: 6px;
+    }
+
+    .logo i {
+        font-size: 1.35rem;
+    }
+
+    .theme-toggle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .mobile-menu-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .nav-links {
+        top: 60px;
+        padding: 0.75rem;
+    }
+
+
+    /* ---------- GRIDS ---------- */
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .grid-auto {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ---------- VEHICLE ---------- */
+
+    .vehicle-img-container {
+        height: 200px;
+    }
+
+
+    /* ---------- BUTTONS ---------- */
+
+    .btn {
+        width: 100%;
+        padding: 11px 16px;
+        font-size: 0.95rem;
+    }
+
+    .btn-sm {
+        width: auto;
+        min-width: 110px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+        padding: 3rem 0 2.5rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+
+    /* ---------- DASHBOARD ---------- */
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1.25rem;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+
+    /* ---------- CARDS ---------- */
+
+    .card {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+
+    /* ---------- FORMS ---------- */
+
+    .form-group {
+        margin-bottom: 1.1rem;
+    }
+
+    .form-control {
+        padding: 13px 14px;
+        font-size: 16px;
+    }
+
+
+    /* ---------- PROFILE ---------- */
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.3rem;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+
+    /* ---------- MODALS ---------- */
+
+    .modal {
+        padding: 0.5rem;
+    }
+
+    .modal-content {
+        border-radius: 14px;
+    }
+
+
+    /* ---------- ADMIN ---------- */
+
+    .admin-main {
+        padding: 0.75rem;
+    }
+
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-card-body {
+        padding: 1rem;
+    }
+
+    .admin-card-header {
+        padding: 1rem;
+    }
+
+    .admin-modal {
+        padding: 0.5rem;
+    }
+
+    .admin-modal-header,
+    .admin-modal-body,
+    .admin-modal-footer {
+        padding: 1rem;
+    }
+
+    .admin-modal-footer {
+        flex-direction: column;
+    }
+
+    .admin-modal-footer .admin-btn-primary,
+    .admin-modal-footer .admin-btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .admin-notification-toast {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES - 360px and below
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .container {
+        width: calc(100% - 16px);
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .logo i {
+        font-size: 1.2rem;
+    }
+
+    .hero h1 {
+        font-size: 1.55rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    .vehicle-img-container {
+        height: 175px;
+    }
+
+    .card {
+        padding: 0.85rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+}
+
+
+
+/* =========================================
+   MOBILE HAMBURGER NAVIGATION
+   ========================================= */
+
+/* Hamburger hidden on desktop */
+.hamburger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    border-radius: 8px;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--dark);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode */
+[data-theme="dark"] .hamburger span {
+    background: #f8fafc;
+}
+
+/* Hover */
+.hamburger:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* =========================================
+   TABLET + MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        position: relative;
+    }
+
+    /* Show hamburger */
+    .hamburger {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    /* Mobile navigation */
+    .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0.25rem;
+
+        padding: 0.75rem;
+
+        background: var(--light);
+
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+        z-index: 1000;
+
+        /* Closed */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+    }
+
+    /* Dark mode menu */
+    [data-theme="dark"] .nav-links {
+        background: #1e293b;
+    }
+
+    /* Open menu */
+    .nav-links.mobile-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Mobile links */
+    .nav-links a {
+        width: 100%;
+        padding: 0.85rem 1rem;
+
+        border-radius: 8px;
+
+        text-align: left;
+    }
+
+    .nav-links a:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
+
+    /* Theme button */
+    .nav-links .theme-toggle {
+        width: 100%;
+        min-height: 44px;
+
+        justify-content: flex-start;
+
+        padding: 0.85rem 1rem;
+
+        border-radius: 8px;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .hamburger {
+        width: 42px;
+        height: 42px;
+    }
+
+    .hamburger span {
+        width: 22px;
+        height: 3px;
+    }
+
+    .nav-links {
+        top: calc(100% + 8px);
+    }
+}

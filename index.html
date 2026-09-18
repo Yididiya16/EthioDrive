@@ -11,6 +11,49 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
+
+
+
+         <nav class="navbar">
+
+    <div class="logo">
+        <i class="fas fa-car"></i>
+        <span>EthioDrive</span>
+    </div>
+
+    <!-- Mobile hamburger button -->
+    <button
+        class="hamburger"
+        id="hamburger"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mainNav"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Navigation links -->
+    <div class="nav-links" id="mainNav">
+
+        <a href="index.html" class="active">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+
+        <button class="theme-toggle" id="themeToggle" type="button">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        
+
+    </div>
+
+</nav>
+
+
+            <!--
             <nav class="navbar">
                 <div class="logo">
                     <i class="fas fa-car"></i>
@@ -24,7 +67,7 @@
                         <i class="fas fa-moon"></i>
                     </button>
                 </div>
-            </nav>
+            </nav> -->
         </div>
     </header>
 
@@ -270,17 +313,94 @@
             }
         }
         
-        function logout() {
+        function logout() { 
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userName');
             localStorage.removeItem('isAdmin');
             window.location.href = 'index.html';
         }
         
+
+
         // Check login on page load
-        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+        /*document.addEventListener('DOMContentLoaded', checkLoginStatus); */
+
+       document.addEventListener('DOMContentLoaded', function () {
+
+        initializeMobileMenu();
+
+        });
 
 
+
+
+        /* =========================================
+   MOBILE HAMBURGER MENU
+   ========================================= */
+
+function initializeMobileMenu() {
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('mainNav');
+
+    if (!hamburger || !navLinks) {
+        return;
+    }
+
+    hamburger.addEventListener('click', function () {
+
+        const isOpen = hamburger.classList.toggle('active');
+
+        navLinks.classList.toggle('mobile-open');
+
+        hamburger.setAttribute(
+            'aria-expanded',
+            isOpen ? 'true' : 'false'
+        );
+
+        hamburger.setAttribute(
+            'aria-label',
+            isOpen
+                ? 'Close navigation menu'
+                : 'Open navigation menu'
+        );
+    });
+
+    /* Close menu when a navigation link is clicked */
+    navLinks.addEventListener('click', function (event) {
+
+        if (event.target.tagName === 'A') {
+
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('mobile-open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute(
+                'aria-label',
+                'Open navigation menu'
+            );
+        }
+
+    });
+
+    /* Close menu when Escape is pressed */
+    document.addEventListener('keydown', function (event) {
+
+        if (event.key === 'Escape') {
+
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('mobile-open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute(
+                'aria-label',
+                'Open navigation menu'
+            );
+        }
+
+    });
+
+}
 
 
 
